@@ -1,6 +1,7 @@
-a =int(input())
+n = int(input())
 sum = 0
-for i in range(a):
-    b = int(input())
-    sum += b
-print(sum)
+numbers = list(map(int, input().split()))
+for i in range(numbers):
+    if(i > 0):
+        sum
+print(sum(numbers))
