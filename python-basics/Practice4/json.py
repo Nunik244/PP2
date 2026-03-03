@@ -6,16 +6,18 @@ with open("sample-data.json") as f:
 
 print("Interface Status")
 print("=" * 80)
-print(f"{'DN':50} {'Description':20} {'Speed':7} {'MTU':5}")
+print(f"{'DN':50} {'Description':20} {'Speed':10} {'MTU'}")
 print("-" * 80)
 
 
-for item in data["imdata"]:
+interfaces = data["imdata"]
+
+for item in interfaces:
     attrs = item["l1PhysIf"]["attributes"]
 
-    dn = attrs.get("dn", "")
+    dn = attrs["dn"]
     descr = attrs.get("descr", "")
-    speed = attrs.get("speed", "")
-    mtu = attrs.get("mtu", "")
+    speed = attrs["speed"]
+    mtu = attrs["mtu"]
 
-    print(f"{dn:50} {descr:20} {speed:7} {mtu:5}")
+    print(f"{dn:50} {descr:20} {speed:10} {mtu}")
