@@ -1,30 +1,16 @@
-
 import os
-import sys
 import shutil
-from pathlib import Path
 
-if len(sys.argv) < 3:
-    print("Usage: python move_files.py source_dir dest_dir [extensions...]")
-    sys.exit(1)
+# Task 3: Find files by extension
+extension = ".txt"
+txt_files = [f for f in os.listdir() if f.endswith(extension)]
+print(f"Found text files: {txt_files}")
 
-src = Path(sys.argv[1])
-dst = Path(sys.argv[2])
-extensions = sys.argv[3:]  # optional list of extensions (e.g., .txt .jpg)
+# Task 4: Move/copy files between directories
+# Ensure 'test_dir' exists
+if not os.path.exists("test_dir"):
+    os.mkdir("test_dir")
 
-if not src.is_dir():
-    print(f"Source directory not found: {src}")
-    sys.exit(1)
-
-dst.mkdir(parents=True, exist_ok=True)
-
-for item in src.iterdir():
-    if not item.is_file():
-        continue
-    if extensions and item.suffix not in extensions:
-        continue
-    try:
-        shutil.move(str(item), str(dst / item.name))
-        print(f"Moved: {item.name}")
-    except Exception as e:
-        print(f"Error moving {item.name}: {e}")
+if txt_files:
+    shutil.move(txt_files[0], "test_dir/" + txt_files[0])
+    print(f"Moved {txt_files[0]} to test_dir/")
