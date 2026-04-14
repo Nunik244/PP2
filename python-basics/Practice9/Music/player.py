@@ -40,6 +40,11 @@ while running:
             # Q - Выход
             elif event.key == pygame.K_q:
                 running = False
+            elif event.key == pygame.K_b:
+                current_song = (current_song - 1) % len(songs)
+                pygame.mixer.music.load(songs[current_song])
+                pygame.mixer.music.play(-1)
+                is_playing = True
 
     screen.fill((30, 30, 30)) # Темно-серый фон
     
@@ -52,7 +57,7 @@ while running:
         status = font.render("|| STATUS: PAUSED", True, (255, 215, 0))
     screen.blit(status, (50, 100))
     
-    tips = small_font.render("P: Play/Pause  |  N: Next Track  |  Q: Quit", True, (150, 150, 150))
+    tips = small_font.render("P: Play/Pause  |  N: Next Track  |  Q: Quit | B:back", True, (150, 150, 150))
     screen.blit(tips, (50, 180))
     
     pygame.display.flip()
