@@ -14,19 +14,15 @@ GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
  
-# Screen information
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 600
- 
-DISPLAYSURF = pygame.display.set_mode((400,600))
+DISPLAYSURF = pygame.display.set_mode((512,512))
 DISPLAYSURF.fill(WHITE)
 pygame.display.set_caption("Game")
  
  
-class Enemy(pygame.sprite.Sprite):
+class Coin(pygame.sprite.Sprite):
       def __init__(self):
         super().__init__() 
-        self.image = pygame.image.load("Enemy.png")
+        self.image = pygame.image.load("Coin.png")
         self.rect = self.image.get_rect()
         self.rect.center=(random.randint(40,SCREEN_WIDTH-40),0) 
  
@@ -35,7 +31,6 @@ class Enemy(pygame.sprite.Sprite):
         if (self.rect.bottom > 600):
             self.rect.top = 0
             self.rect.center = (random.randint(30, 370), 0)
- 
       def draw(self, surface):
         surface.blit(self.image, self.rect) 
  
