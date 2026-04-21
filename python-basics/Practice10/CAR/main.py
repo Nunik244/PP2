@@ -6,8 +6,6 @@ from car import Car,Road,Coin
 WIDTH = 800
 HEIGHT = 800
 FPS = 60
-
-# ====================== ГЛАВНАЯ ФУНКЦИЯ ======================
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -37,12 +35,10 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Обновление
         car.update()
         coins.update()
         road.update()
 
-        # Спавн монет каждые ~0.6 секунды
         coin_timer += 1
         if coin_timer >= 35:
             new_coin = Coin()
@@ -50,15 +46,12 @@ def main():
             coins.add(new_coin)
             coin_timer = 0
 
-        # Проверка сбора монет
         collected = pygame.sprite.spritecollide(car, coins, True)
         score += len(collected)
 
-        # Рисование
         road.draw(screen)
         all_sprites.draw(screen)
 
-        # Отображение счёта
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (25, 25))
 
@@ -68,6 +61,5 @@ def main():
     sys.exit()
 
 
-# ====================== ЗАПУСК ======================
 if __name__ == "__main__":
     main()
