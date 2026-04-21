@@ -2,11 +2,15 @@ import pygame
 import sys
 from clac import Turtle
 
-# Configuration
 WIDTH, HEIGHT = 800, 600
 FPS = 60
+r = 0
+g = 0
+b = 0
 
 def main():
+    global r, g, b
+    
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Pygame Turtle Controller")
@@ -29,7 +33,7 @@ def main():
                     my_turtle.draw_circle()
                 elif event.key == pygame.K_t:
                     my_turtle.draw_triangle()
-                elif event.key == pygame.K_r:
+                elif event.key == pygame.K_r: 
                     my_turtle.draw_rhombus()
                 
                 elif event.key == pygame.K_UP:
@@ -43,11 +47,28 @@ def main():
                 
                 elif event.key == pygame.K_SPACE:
                     my_turtle.points = []
+                elif event.key == pygame.K_1:
+                    r = (r + 10) % 256
+                    my_turtle.color = (r, g, b)
+                    my_turtle.drawing_color = (r, g, b) 
+                elif event.key == pygame.K_2:
+                    g = (g + 10) % 256
+                    my_turtle.color = (r, g, b)
+                    my_turtle.drawing_color = (r, g, b) 
+                elif event.key == pygame.K_3:
+                    b = (b + 10) % 256
+                    my_turtle.color = (r, g, b)
+                    my_turtle.drawing_color = (r, g, b)  
+                elif event.key == pygame.K_0:
+                    r, g, b = 0, 0, 0
+                    my_turtle.color = (r, g, b)
+                    my_turtle.drawing_color = (r, g, b)  
 
         my_turtle.render(screen)
         
         font = pygame.font.SysFont(None, 24)
-        img = font.render("S: Square | C: Circle | T: Triangle | R: Rhombus | Arrows: Move | Space: Clear", True, (200, 200, 200))
+        instructions = "S/C/T/R: Shapes | Arrows: Move | 1/2/3: R/G/B | 0: Reset Color | Space: Clear"
+        img = font.render(instructions, True, (200, 200, 200))
         screen.blit(img, (20, 20))
 
         pygame.display.flip()
