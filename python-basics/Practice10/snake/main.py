@@ -9,6 +9,7 @@ GRID_WIDTH = WIDTH // GRID_SIZE
 GRID_HEIGHT = HEIGHT // GRID_SIZE
 clock = pygame.time.Clock()
 move_timer = 0
+timer = 0
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("snake")
@@ -46,9 +47,14 @@ while running:
     screen.fill((0, 0, 0))
     snake.draw(screen)
     screen.blit(food.image, food.rect)
-    
+    timer +=1
+    if timer >35:
+        timer = 0
+        food.respawn()
     score_text = font.render(f"Score: {snake.score}", True, (255, 255, 255))
     screen.blit(score_text, (10, 10))
+    if snake.score > 4:
+        snake.speed = 10 - (snake.score -4) //2
 
     pygame.display.flip()
     clock.tick(60)
